@@ -1,4 +1,27 @@
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  seat_no: yup.string().required("Please enter seat no"),
+});
+
+const generateInitialFormFields = () => {
+  return {
+    seat_no: "",
+  };
+};
 const Home = () => {
+  const { handleSubmit, control } = useForm({
+    resolver: yupResolver(schema),
+    mode: "all",
+    defaultValues: generateInitialFormFields(),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-center text-3xl font-bold text-orange-600">Movie Seat Booking</h1>
@@ -28,14 +51,33 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <input
-          type="text"
-          className="mb-4 block w-full rounded border p-3 outline-none"
-          placeholder="Enter row count"
-        />
-        <div className="flex items-center justify-start">
-          <button className="rounded bg-green-500 p-3 text-white">Seat List</button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <>
+            <Controller
+              name="seat_no"
+              control={control}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <>
+                  {" "}
+                  <input
+                    type="text"
+                    className="mb-4 block w-full rounded border p-3 outline-none"
+                    placeholder="Enter row count"
+                    value={value}
+                    onChange={onChange}
+                  />
+                  {error && <span className="text-orange-700">{error.message}</span>}
+                </>
+              )}
+            />
+
+            <div className="flex items-center justify-start">
+              <button className="rounded bg-green-500 p-3 text-white" type="submit">
+                Seat List
+              </button>
+            </div>
+          </>
+        </form>
       </div>
     </div>
   );
