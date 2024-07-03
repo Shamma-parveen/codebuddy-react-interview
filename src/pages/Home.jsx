@@ -2,8 +2,8 @@ const Home = () => {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-center text-3xl font-bold text-orange-600">Movie Seat Booking</h1>
-      <div className="rounded-lg bg-gray-50 p-7 text-gray-900 shadow-lg">
-        <div>
+      <div className="mb-4 rounded-lg bg-gray-50 p-7 text-gray-900 shadow-lg">
+        <div className="mb-4">
           <div className="flex flex-row-reverse gap-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
@@ -28,14 +28,12 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="rounded-lg bg-gray-50 p-7 text-gray-900 shadow-lg">
         <input
           type="text"
           className="mb-4 block w-full rounded border p-3 outline-none"
           placeholder="Enter row count"
         />
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-start">
           <button className="rounded bg-green-500 p-3 text-white">Seat List</button>
         </div>
       </div>
